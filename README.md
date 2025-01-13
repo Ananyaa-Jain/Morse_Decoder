@@ -15,16 +15,13 @@ This repository contains two Java-based Morse code utilities:
    ```bash
    git clone https://github.com/your-username/morse-decoder.git
    cd morse-decoder
-Compile and run the desired file:
-
-Decode Morse to Text:
-bash
-Copy code
-javac MorseToTextDecoder.java
-java MorseToTextDecoder
-Encode Text to Morse with Audio:
-bash
-Copy code
-javac TextToMorseWithAudio.java
-java TextToMorseWithAudio
+2. Compile and run the desired file:                                                    
+   **Decode Morse to Text:**                                                             
+        ```bash                                                  
+        javac MorseToTextDecoder.java                                                       
+        java MorseToTextDecoder                                                         
+   **Encode Text to Morse with Audio:**                                                  
+      ```bash                                                    
+        javac TextToMorseWithAudio.java                                                     
+        java TextToMorseWithAudio                                                  
 Contributions are welcome! Fork the repository, make changes, and submit a pull request.
