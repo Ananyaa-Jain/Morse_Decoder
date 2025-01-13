@@ -22,5 +22,5 @@ This repository contains two Java-based Morse code utilities:
       javac TextToMorseWithAudio.java
       java TextToMorseWithAudio
 
-**Contributions**
+### Contributions
 Contributions are welcome! Fork the repository, make changes, and submit a pull request.
