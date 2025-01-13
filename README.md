@@ -15,7 +15,7 @@ This repository contains two Java-based Morse code utilities:
    ```bash
    git clone https://github.com/your-username/morse-decoder.git
    cd morse-decoder
-2. Compile and run the desired file:                                                    
+2. Compile and run the desired file:
 **Decode Morse to Text:**                                                             
    ```bash
    javac MorseToTextDecoder.java
