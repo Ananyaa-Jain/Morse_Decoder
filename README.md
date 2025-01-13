@@ -20,9 +20,7 @@ This repository contains two Java-based Morse code utilities:
    ```bash
    javac MorseToTextDecoder.java
    java MorseToTextDecoder
-                                                         
-**Encode Text to Morse with Audio:**
-```bash
-javac TextToMorseWithAudio.java
-java TextToMorseWithAudio                                                  
-Contributions are welcome! Fork the repository, make changes, and submit a pull request.
+   **Encode Text to Morse with Audio:**
+   ```bash
+   javac TextToMorseWithAudio.java
+   java TextToMorseWithAudio                                                  
