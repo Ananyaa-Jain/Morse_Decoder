@@ -38,6 +38,7 @@ public class MorseStringToText {
         String morseInput = sc.nextLine();
         String[] morseWords = morseInput.split(" ");
 
+        //Use StringBuilder to append
         StringBuilder textOutput = new StringBuilder();
         for (String morse : morseWords) {
             textOutput.append(morseToText.getOrDefault(morse, ' '));
