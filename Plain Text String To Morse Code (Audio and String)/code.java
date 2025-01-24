@@ -51,7 +51,7 @@ public class MorseToAudioAndText {
         textToMorse.put(' ', "/"); // Space between words
 
         // Input from user
-        System.out.println("Enter text to convert to Morse code and audio:");
+        System.out.println("Enter Plain Text to convert to Morse Code and Audio:");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine().toUpperCase();
 
