@@ -1,86 +1,49 @@
 import javax.sound.sampled.*;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.*;
 
-public class MorseToAudioAndText {
+public class MorseCodeAudio {
+    private static final int DOT_DURATION = 200;
+    private static final int DASH_DURATION = 600;
+    private static final int GAP_DURATION = 200;
+    private static final int FREQUENCY = 800;
     private static final int SAMPLE_RATE = 44100;
-    private static final int DOT_DURATION = 200;  // milliseconds
-    private static final int DASH_DURATION = 600; // milliseconds
-    private static final int GAP_DURATION = 200;  // milliseconds between dots/dashes
-    private static final int FREQUENCY = 800;     // Frequency of the tone (Hz)
+
+    private static final Map<Character, String> MORSE_MAP = Map.ofEntries(
+        Map.entry('A', ".-"), Map.entry('B', "-..."), Map.entry('C', "-.-."), Map.entry('D', "-.."),
+        Map.entry('E', "."), Map.entry('F', "..-."), Map.entry('G', "--."), Map.entry('H', "...."),
+        Map.entry('I', ".."), Map.entry('J', ".---"), Map.entry('K', "-.-"), Map.entry('L', ".-.."),
+        Map.entry('M', "--"), Map.entry('N', "-."), Map.entry('O', "---"), Map.entry('P', ".--."),
+        Map.entry('Q', "--.-"), Map.entry('R', ".-."), Map.entry('S', "..."), Map.entry('T', "-"),
+        Map.entry('U', "..-"), Map.entry('V', "...-"), Map.entry('W', ".--"), Map.entry('X', "-..-"),
+        Map.entry('Y', "-.--"), Map.entry('Z', "--.."), Map.entry('1', ".----"), Map.entry('2', "..---"),
+        Map.entry('3', "...--"), Map.entry('4', "....-"), Map.entry('5', "....."), Map.entry('6', "-...."),
+        Map.entry('7', "--..."), Map.entry('8', "---.."), Map.entry('9', "----."), Map.entry('0', "-----"),
+        Map.entry(' ', "/") // Space between words
+    );
 
     public static void main(String[] args) {
-        // Morse code dictionary: Text to Morse
-        HashMap<Character, String> textToMorse = new HashMap<>();
-        textToMorse.put('A', ".-");
-        textToMorse.put('B', "-...");
-        textToMorse.put('C', "-.-.");
-        textToMorse.put('D', "-..");
-        textToMorse.put('E', ".");
-        textToMorse.put('F', "..-.");
-        textToMorse.put('G', "--.");
-        textToMorse.put('H', "....");
-        textToMorse.put('I', "..");
-        textToMorse.put('J', ".---");
-        textToMorse.put('K', "-.-");
-        textToMorse.put('L', ".-..");
-        textToMorse.put('M', "--");
-        textToMorse.put('N', "-.");
-        textToMorse.put('O', "---");
-        textToMorse.put('P', ".--.");
-        textToMorse.put('Q', "--.-");
-        textToMorse.put('R', ".-.");
-        textToMorse.put('S', "...");
-        textToMorse.put('T', "-");
-        textToMorse.put('U', "..-");
-        textToMorse.put('V', "...-");
-        textToMorse.put('W', ".--");
-        textToMorse.put('X', "-..-");
-        textToMorse.put('Y', "-.--");
-        textToMorse.put('Z', "--..");
-        textToMorse.put('1', ".----");
-        textToMorse.put('2', "..---");
-        textToMorse.put('3', "...--");
-        textToMorse.put('4', "....-");
-        textToMorse.put('5', ".....");
-        textToMorse.put('6', "-....");
-        textToMorse.put('7', "--...");
-        textToMorse.put('8', "---..");
-        textToMorse.put('9', "----.");
-        textToMorse.put('0', "-----");
-        textToMorse.put(' ', "/"); // Space between words
-
-        // Input from user
-        System.out.println("Enter Plain Text to convert to Morse Code and Audio:");
         Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter text: ");
         String input = scanner.nextLine().toUpperCase();
-
-        StringBuilder morseOutput = new StringBuilder();
-
-        // Convert text to Morse code
+        
+        StringBuilder morseCode = new StringBuilder();
         for (char c : input.toCharArray()) {
-            String morse = textToMorse.getOrDefault(c, "");
-            morseOutput.append(morse).append(" ");
+            morseCode.append(MORSE_MAP.getOrDefault(c, "")).append(" ");
         }
 
-        // Print Morse code output
-        System.out.println("Morse Code: " + morseOutput.toString().trim());
+        System.out.println("Morse Code: " + morseCode.toString().trim());
+        playMorseCode(morseCode.toString());
+    }
 
-        // Play Morse code as audio
-        for (char c : morseOutput.toString().toCharArray()) {
-            if (c == '.') {
-                playTone(DOT_DURATION); // Play dot
-            } else if (c == '-') {
-                playTone(DASH_DURATION); // Play dash
-            } else if (c == ' ') {
-                sleep(GAP_DURATION); // Gap between symbols
-            } else if (c == '/') {
-                sleep(GAP_DURATION * 3); // Gap between words
-            }
+    private static void playMorseCode(String morse) {
+        for (char c : morse.toCharArray()) {
+            if (c == '.') playTone(DOT_DURATION);
+            else if (c == '-') playTone(DASH_DURATION);
+            else if (c == ' ') sleep(GAP_DURATION);
+            else if (c == '/') sleep(GAP_DURATION * 3);
         }
     }
 
-    // Method to play a tone of specified duration
     private static void playTone(int duration) {
         try {
             byte[] buffer = new byte[SAMPLE_RATE * duration / 1000];
@@ -99,7 +62,6 @@ public class MorseToAudioAndText {
         }
     }
 
-    // Method to pause the program for a given duration
     private static void sleep(int duration) {
         try {
             Thread.sleep(duration);
