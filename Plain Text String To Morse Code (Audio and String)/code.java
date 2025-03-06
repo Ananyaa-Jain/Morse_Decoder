@@ -2,11 +2,11 @@ import javax.sound.sampled.*;
 import java.util.*;
 
 public class MorseCodeAudio {
-    private static final int DOT_DURATION = 200;
-    private static final int DASH_DURATION = 600;
-    private static final int GAP_DURATION = 200;
-    private static final int FREQUENCY = 800;
-    private static final int SAMPLE_RATE = 44100;
+    private static final int DOT_DURATION = 200; //200ms 
+    private static final int DASH_DURATION = 600; //600ms
+    private static final int GAP_DURATION = 200; //200ms - between letters
+    private static final int FREQUENCY = 800; //800hz - defines how high or low the beeps sound
+    private static final int SAMPLE_RATE = 44100; //44.1khz - define how clear the beep sounds
 
     private static final Map<Character, String> MORSE_MAP = Map.ofEntries(
         Map.entry('A', ".-"), Map.entry('B', "-..."), Map.entry('C', "-.-."), Map.entry('D', "-.."),
